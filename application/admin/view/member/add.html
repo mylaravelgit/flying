@@ -1,0 +1,202 @@
+{extend name="public/base" /}
+
+{block name="content"}
+        <!-- Page Content -->
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-home"></i>&nbsp;客户管理
+            </li>
+            <li>
+                客户添加
+            </li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+    <!-- Page Body -->
+    <div class="row widget-body " style="margin-left: 50px">
+        <div class="col-lg-16 col-sm-16 col-xs-16">
+            <h5 class="row-title before-magenta"><i class="fa fa-edit magenta"></i><a href="{:url('admin/member/add')}">添加客户</a></h5>
+            <div class="row">
+                <div class="col-lg-8 col-sm-8 col-xs-16">
+                    <div class="widget flat radius-bordered">
+                        <div class="widget-header bg-blue">
+                            <span class="widget-caption">客户信息</span>
+                        </div>
+                        <div class="widget-body">
+                            <div id="registration-form">
+                                <form role="form">
+                                    <div class="form-title">
+                                        客户详细信息
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <span class="input-icon icon-left">
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="客户姓名">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <span class="input-icon icon-left">
+                                                    <input type="text" class="form-control" id="address" name="address" placeholder="住址">
+                                                    <i class="fa fa-anchor"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <span class="input-icon icon-left">
+                                                    <input type="text" class="form-control"  id="phone" name="phone" placeholder="手机号码">
+                                                    <i class="glyphicon glyphicon-phone"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <span class="input-icon icon-left">
+                                                    <input type="text" class="form-control" id="earphone" name="earphone"  placeholder="其他联系方式">
+                                                    <i class="glyphicon glyphicon-phone glyphicon-earphone"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <span class="input-icon icon-left">
+                                                    <input type="text" class="form-control" id="comes" name="comes"  placeholder="客户来源">
+                                                    <i class="fa fa-lemon-o"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <span class="input-icon icon-left">
+                                                    <input type="text" class="form-control" id="company" name="company"  placeholder="公司名称">
+                                                    <i class="fa  fa-briefcase"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                            <select id="cateid" name="cateid" class="form-control">
+                                                <option value="">客户分类</option>
+                                                {volist name="cates" id="vo"}
+                                                <option value="{$vo.id}">{$vo.catename}</option>
+                                                {/volist}
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                            <select id="status" name="status" class="form-control">
+                                                <option value="">客户状态</option>
+
+                                                <option value="1">已付款</option>
+                                                <option value="2">待付款</option>
+                                                <option value="3">在对比</option>
+                                                <option value="4">选择其他家</option>
+                                                <option value="5">无意向</option>
+                                                <option value="6">广告骚扰</option>
+                                                <option value="7">无人接听</option>
+                                                <option value="8">电话关机</option>
+                                                <option value="9">挂电话</option>
+                                                <option value="10">高粘度客户</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" id="followDate" name="followDate"
+                                                           placeholder="跟进日期" type="text" data-date-format="yyyy-mm-dd">
+                                                    <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="content" class="control-label col-sm-1">备注</label>
+                                                <div class="col-sm-11">
+                                                    <textarea name="content" id="content" style="width: 100%" rows="10" class=""></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <button type="submit" class="btn btn-blue center-align " id="memberAdd">添加</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+        <!-- /Page Content -->
+{/block}
+{block name="js"}
+<script src="/static/admin/js/datetime/bootstrap-datepicker.js"></script>
+<script src="/static/lib/ueditor/ueditor.config.js"></script>
+<script src="/static/lib/ueditor/ueditor.all.js"></script>
+
+
+ <script>
+    $(function () {
+        $('.date-picker').datepicker();
+
+        UE.getEditor('content');
+        $('#memberAdd').click(function () {
+            $.ajax({
+                url:"{:url('admin/member/add')}",
+                type:'post',
+                data:$('form').serialize(),
+                dataType:'json',
+                success:function (data) {
+                    if (data.code==1){
+                        layer.msg(
+                            data.msg,{icon:6,time:2000},
+                            function () {
+                                location.href=data.url
+                            }
+                        );
+                    }else {
+                        layer.open({
+                            title:'操作失败',
+                            content:data.msg,
+                            icon:5,
+                            anim:6
+                        })
+                    }
+                }
+            });
+            return false ;
+        })
+    })
+</script>
+
+{/block}

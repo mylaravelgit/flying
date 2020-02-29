@@ -1,0 +1,116 @@
+<?php
+
+namespace app\common\model;
+
+use think\Model;
+use think\model\concern\SoftDelete;
+
+class Member extends Model
+{
+    //
+    use  SoftDelete;
+//    protected $autoWriteTimestamp = true;
+//    // 定义时间戳字段名
+//    protected $followDate = 'followDate';
+
+
+    //只读字段
+//    protected $readonly=['username','email'];
+
+    //关联评论
+    public function comments()
+    {
+        return $this->hasMany('Comment','member_id','id');
+    }
+
+    //会员添加
+    public function add($data)
+    {
+        $validate=new \app\common\validate\Member();
+        if (!$validate->scene('add')->check($data)){
+            return $validate->getError();
+        }
+//        $data['followDate']=$data['followDate']->time();
+        $result=$this->allowField(true)
+            ->save($data);
+
+        if ($result){
+            return 1;
+        }else{
+            return ' 客户添加失败';
+        }
+
+        return false ;
+    }
+
+    //会员编辑
+    public function edit($data)
+    {
+
+        $validate=new \app\common\validate\Member();
+        if (!$validate->scene('edit')->check($data)){
+            return $validate->getError();
+        }
+        $memberInfo=$this->find($data['id']);
+        $memberInfo->username=$data['username'];
+        $memberInfo->address=$data['address'];
+        $memberInfo->phone=$data['phone'];
+        $memberInfo->earphone=$data['earphone'];
+        $memberInfo->comes=$data['comes'];
+        $memberInfo->company=$data['company'];
+        $memberInfo->cate_id=$data['cate_id'];
+        $memberInfo->status=$data['status'];
+        $memberInfo->followDate=$data['followDate'];
+        $memberInfo->content=$data['content'];
+
+
+        $result=$memberInfo->save();
+        if ($result){
+            return 1;
+        }else{
+            return ' 会员编辑失败';
+        }
+
+        return false ;
+    }
+
+    //会员注册
+    public function register($data)
+    {
+        $validate=new \app\common\validate\Member();
+        if (!$validate->scene('register')->check($data)){
+            return $validate->getError();
+        }
+        $result=$this->allowField(true)->save($data);
+        if ($result){
+            return 1;
+        }else{
+            return ' 会员添加失败';
+        }
+
+        return false ;
+    }
+    //会员登录
+    public function login($data)
+    {
+        $validate=new \app\common\validate\Member();
+        if (!$validate->scene('login')->check($data)){
+            return $validate->getError();
+        }
+        unset($data['verify']);
+        $result=$this->where($data)->find();
+
+        if ($result){
+            $sessionData=[
+                'id'=>$result['id'],
+                'nickname'=>$result['nickname']
+            ];
+            session('index',$sessionData);
+            return 1;
+        }else{
+            return ' 会员添加失败';
+        }
+
+        return false ;
+    }
+}
